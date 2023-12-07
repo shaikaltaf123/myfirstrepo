@@ -1,0 +1,132 @@
+Step1:Install Java (Amazon Linux 2023)
+>>sudo dnf install java-17-amazon-corretto -y
+
+Step 2: Go to Maven Downlaods and get the download link of the latest package.
+>>wget https://dlcdn.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.tar.gz
+
+sudo tar xvf apache-maven-3.9.0-bin.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.9.0 /opt/maven
+export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+
+sudo yum update –y
+    1. Add the Jenkins repo using the following command:
+[ec2-user ~]$ sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    2. Import a key file from Jenkins-CI to enable installation from the package:
+[ec2-user ~]$ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+[ec2-user ~]$ sudo yum upgrade
+    3. Install Java (Amazon Linux 2023):
+[ec2-user ~]$ sudo dnf install java-17-amazon-corretto -y
+    4. Install Jenkins:
+[ec2-user ~]$ sudo yum install jenkins -y
+    5. Enable the Jenkins service to start at boot:
+[ec2-user ~]$ sudo systemctl enable jenkins
+    6. Start Jenkins as a service:
+[ec2-user ~]$ sudo systemctl start jenkins
+You can check the status of the Jenkins service using the command:
+[ec2-user ~]$ sudo systemctl status jenkins
+Configuring Jenkins
+Jenkins is now installed and running on your EC2 instance. To configure Jenkins:
+    1. Connect to http://<your_server_public_DNS>:8080 from your browser. You will be able to access Jenkins through its management interface:
+===>
+Intigration of maven with jenkins
+Step #1: Download Maven
+Download maven in current directory
+>>wget https://dlcdn.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.tar.gz
+Step #2: Extract Maven and Symlink
+Next, extract the newly downloaded Maven archive to the /opt directory:
+
+>>tar xf apache-maven-3.9.5-bin.tar.gz -C /opt
+rename the folder
+>>mv  /opt/apache-maven-3.9.5 /opt/maven
+
+Step #3: Configure Environment Variables
+
+Create a maven.sh file inside the /etc/profile.d/ directory:
+>>vim /etc/profile.d/maven.sh
+Copy the following configuration out and paste it into the maven.sh file:
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+Finally, to get these variables into play in the environment, run the source command on the file:
+root@ubuntu:~# source /etc/profile.d/maven.sh
+
+Step #4: Verify Maven Installation
+To verify Maven is installed properly, run the version command and check the output:
+root@ubuntu:~# mvn -v
+Apache Maven 3.9.5 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+Maven home: /opt/maven
+Java version: 11.0.7, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
+Default locale: en, platform encoding: UTF-8
+OS name: "linux", version: "4.15.0-91-generic", arch: "amd64", family: "unix"
+
+===>
+<role rolename="manager-gui"/>
+<user username="admin1" password="admin1" roles="manager-gui"/>
+
+<role rolename="admin-gui"/>
+<user username="admin" password="admin" roles="admin-gui, manager-gui"/>
+==>
+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
+===>
+ git init .
+ 1100  ls -a
+ 1101  cd .git
+ 1102  ls
+ 1103  cat /config
+ 1104  cat config
+ 1105  cd ..
+ 1106  echo "hello altaf">>file1
+ 1107  ls
+ 1108  cat file1
+ 1109  git status
+ 1110  git add file1
+ 1111  git status
+ 1112  git commit -m "commition"
+ 1113  git log
+ 1114  git status
+ 1115  ls
+ 1116  gedit file1
+ 1117  git status
+ 1118  git add file1
+ 1119  ls
+ 1120  git commit -m "done"
+ 1121  git status
+ 1122  git log
+ 1123  history
+ 1124  pwd
+ 1125  mkdir main_altaf
+ 1126  ls
+ 1127  cd main_altaf
+ 1128  git status
+ 1129  git init .
+ 1130  ls la
+ 1131  ls -a
+ 1132  git status
+ 1133  ls -a
+ 1134  cat altaf1
+ 1135  touch altaf1
+ 1136  echo "altaf">>altaf1
+ 1137  git status
+ 1138  git add altaf1
+ 1139  git status
+ 1140  git commit -m "yes"
+ 1141  ls
+ 1142  git log
+ 1143  git remote add origin https://github.com/shaikaltaf123/altaf_new.git
+ 1144  cat .get/config
+ 1145  ls
+ 1146  ls -a
+ 1147  cd .git
+ 1148  cat config
+ 1149  cd ..
+ 1150  git push -u origin
+ 1151  git push --set-upstream origin master
+ 1152  git log
+ 1153  history
+
+
